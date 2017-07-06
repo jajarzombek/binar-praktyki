@@ -18,9 +18,12 @@ const reducer = (state = initialState, action) => {
 		case "DECREMENT":
 			return { ...state, counter: state.counter - 1 };
 		case "ADDPOST":
-			return { ...state, posts: [...posts, action.data] };
-		// case "REMOVEPOST":
-		//   return { ...state, posts: [...posts,action.data ]}
+			return { ...state, posts: [...state.posts, action.data] };
+		case "REMOVEPOST":
+			return {
+				counter: state.counter,
+				posts: state.posts.filter(p => p.timestamp !== action.data)
+			};
 		default:
 			return initialState;
 	}

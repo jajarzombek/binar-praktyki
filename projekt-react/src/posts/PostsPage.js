@@ -10,22 +10,30 @@ class PostsPage extends React.Component {
 			searchPrase: ""
 		};
 		//this.logDate = this.logDate.bind(this);
-		this.addPost = this.addPost.bind(this);
+		//this.addPost = this.addPost.bind(this);
 	}
 
 	//zbonduje sie automatycznie - wynika z konfiguracji projektu
-	addPost = post => {
-		this.setState({
-			posts: [...this.state.posts, { ...post, timestamp: new Date().getTime() }]
-		});
-		this.props.counter(this.state.posts.length);
-	};
+	// addPost = post => {
+	// 	this.props.dispatch({
+	// 		type: "ADDPOST",
+	// 		data: { ...post, timestamp: new Date().getTime() }
+	// 	});
+	// 	// this.setState({
+	// 	// 	posts: [...this.state.posts, { ...post, timestamp: new Date().getTime() }]
+	// 	// });
+	// 	//this.props.counter(this.props.posts.length);
+	// };
 
 	removePost = timestamp => {
-		this.setState({
-			posts: this.state.posts.filter(p => p.timestamp !== timestamp)
+		// this.setState({
+		// 	posts: this.state.posts.filter(p => p.timestamp !== timestamp)
+		// });
+		this.props.dispatch({
+			type: "REMOVEPOST",
+			data: timestamp
 		});
-		this.props.counter(this.state.posts.length);
+		//this.props.counter(this.props.posts.length);
 	};
 
 	searchPost = event => {
@@ -47,10 +55,10 @@ class PostsPage extends React.Component {
 		return (
 			<div className="container-fluid">
 				<div>
-					<div onClick={this.update}>Aktualizuj liczbę postów </div>
+					{/* <div onClick={this.update}>Aktualizuj liczbę postów </div> */}
 					{/* Post counter: {countPosts} */}
 				</div>
-				<PostForm onSubmit={this.addPost} />
+				{/* <PostForm onSubmit={this.addPost} /> */}
 				<div className="container-fluid">
 					<label className="">Search: </label>
 					<input

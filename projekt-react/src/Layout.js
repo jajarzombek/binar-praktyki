@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { Link } from "react-router";
 import logo from "./img/logo.png";
 import styled from "styled-components";
+import { connect } from "react-redux";
 /**
  * ComponentName
  */
@@ -56,8 +57,13 @@ export class Layout extends React.Component {
 							</Link>
 						</li>
 						<li>
+							<Link to="/post-form" style={{ color: "#c94c4c" }}>
+								Add Post
+							</Link>
+						</li>
+						<li>
 							<Link style={{ color: "#c94c4c" }}>
-								Liczba postów: {this.state.counter}
+								{" "}Post Counter: {this.props.postCounter}
 							</Link>
 						</li>
 					</ul>
@@ -83,5 +89,9 @@ const StyledComponent = styled.div`
   font-size: 20px,
   color: #fff
 `;
-
-export default Layout;
+const mapStateToProps = state => {
+	return {
+		postCounter: state.posts.length
+	};
+};
+export default connect(mapStateToProps)(Layout);
