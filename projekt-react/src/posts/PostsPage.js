@@ -46,9 +46,9 @@ class PostsPage extends React.Component {
 	// 	this.props.counter(this.state.posts.length);
 	// };
 	render() {
-		const postsToRender = this.props.posts.filter(p =>
-			p.title.includes(this.state.searchPrase)
-		);
+		const postsToRender = this.props.posts.postsCollection
+			.filter(p => p.title.includes(this.state.searchPrase))
+			.reverse();
 
 		const countPosts = this.props.posts.length;
 

@@ -7,18 +7,49 @@ import { connect } from "react-redux";
  * ComponentName
  */
 export class Layout extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			counter: 0
-		};
-		//this.logDate = this.logDate.bind(this);
-	}
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {
+	// 		counter: 0
+	// 	};
+	// 	//this.logDate = this.logDate.bind(this);
+	// }
 
-	updateCounter = val => {
-		this.setState({
-			counter: val
+	// updateCounter = val => {
+	// 	this.setState({
+	// 		counter: val
+	// 	});
+	// };
+	// function UserGreeting(name) {
+	//   return <h1>Welcome back, {name} !</h1>;
+	// }
+	//
+	// function GuestGreeting(props) {
+	//   return <h1>Please sign up.</h1>;
+	// }
+
+	logout = () => {
+		this.props.dispatch({
+			type: "LOGOUT",
+			data: {}
 		});
+		//przejscie do strony posts
+		this.props.router.push("posts");
+	};
+	isLogged = () => {
+		if (this.props.email !== "") {
+			return (
+				<Link style={{ color: "#c94c4c" }} onClick={this.logout}>
+					Logout
+				</Link>
+			);
+		} else {
+			return (
+				<Link to="/post-login" style={{ color: "#c94c4c" }}>
+					Login
+				</Link>
+			);
+		}
 	};
 	render() {
 		return (
@@ -61,22 +92,32 @@ export class Layout extends React.Component {
 								Add Post
 							</Link>
 						</li>
+
 						<li>
 							<Link style={{ color: "#c94c4c" }}>
 								{" "}Post Counter: {this.props.postCounter}
 							</Link>
 						</li>
+						<li>
+							{this.props.email &&
+								<Link style={{ color: "#c94c4c" }}>
+									{" "}Hello {this.props.email}
+								</Link>}
+						</li>
+						<li>
+							{this.isLogged()}
+						</li>
 					</ul>
 				</div>
 				<div className="container-fluid">
 					<div className="row">
-						{/* {this.props.children} */}
+						{this.props.children}
 						{/* {React.Children.map(this.props.children, c =>
 							React.cloneElement(c, { injectedProp: "props from layout" })
 						)} */}
-						{React.Children.map(this.props.children, c =>
+						{/* {React.Children.map(this.props.children, c =>
 							React.cloneElement(c, { counter: this.updateCounter })
-						)}
+						)} */}
 					</div>
 				</div>
 			</StyledComponent>
@@ -91,7 +132,8 @@ const StyledComponent = styled.div`
 `;
 const mapStateToProps = state => {
 	return {
-		postCounter: state.posts.length
+		postCounter: state.posts.postsCollection.length,
+		email: state.session.email
 	};
 };
 export default connect(mapStateToProps)(Layout);
