@@ -8,7 +8,7 @@ import PostsPage from "./posts/PostsPage";
 import Home from "./Home";
 import PostsDetails from "./posts/PostsDetails";
 import AddPostPage from "./posts/AddPostPage";
-import Login from "./posts/Login";
+import Login from "./session/Login";
 // import "./App.css";
 
 //const {title: ' tytul', timestamp: newDate().toString}

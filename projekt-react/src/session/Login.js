@@ -1,8 +1,8 @@
 import React from "react";
-import PostForm from "./PostForm";
-import { PostList, Post } from "./PostList";
+import PostForm from "../posts/PostForm";
+import { PostList, Post } from "../posts/PostList";
 import { connect } from "react-redux";
-import ParityList from "./ParityList";
+import ParityList from "../posts/ParityList";
 import { withRouter } from "react-router";
 import Button from "../user-interface/Button";
 import axios from "axios";

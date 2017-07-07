@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from "redux";
-import { counter, posts } from "./posts/postsReducer";
-import session from "./session/sessionReducer";
+import { counter, posts } from "./reducers/posts";
+import session from "./reducers/session";
 
 //polaczone reducery
 const rootReducer = combineReducers({
