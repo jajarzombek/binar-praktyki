@@ -3,26 +3,49 @@ import PostForm from "./PostForm";
 import { PostList, Post } from "./PostList";
 import { connect } from "react-redux";
 import ParityList from "./ParityList";
+import apiClient from "../lib/api-client";
 import { withRouter } from "react-router";
 
 class AddPostPage extends React.Component {
-	// eslint-disable-line react/prefer-stateless-function
-	addPost = post => {
-		this.props.dispatch({
-			type: "ADDPOST",
-			data: { ...post, timestamp: new Date().getTime() }
-		});
-		//przejscie do strony posts
-		this.props.router.push("posts");
-	};
+  // eslint-disable-line react/prefer-stateless-function
+  addPost = post => {
+    apiClient
+      .post(
+        "/example/api/v1/posts",
+        {
+          post: {
+            title: post.title,
+            body: post.text,
+            user_id: this.props.session.user_id
+          }
+        },
+        {
+          headers: {
+            "X-User-Email": this.props.session.email,
+            "X-User-Token": this.props.session.token
+          }
+        }
+      )
+      .then(response => {
+        console.log(response);
 
-	render() {
-		console.log(this.props);
-		return <PostForm onSubmit={this.addPost} />;
-	}
+        //przejscie do strony posts
+        this.props.router.push("posts");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  render() {
+    console.log(this.props);
+    return <PostForm onSubmit={this.addPost} />;
+  }
 }
 const mapStateToProps = state => {
-	return {};
+  return {
+    session: state.session
+  };
 };
 
 export default connect(mapStateToProps)(withRouter(AddPostPage));
