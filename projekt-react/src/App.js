@@ -13,7 +13,7 @@ import Register from "./session/Register";
 // import "./App.css";
 
 //const {title: ' tytul', timestamp: newDate().toString}
-
+//komentarz
 class App extends Component {
   authenticateUser = (nextState, replace) => {
     const state = this.props.store.getState();
