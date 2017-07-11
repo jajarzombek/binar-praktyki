@@ -1,11 +1,9 @@
 import React from "react";
-import PostForm from "../posts/PostForm";
-import { PostList, Post } from "../posts/PostList";
 import { connect } from "react-redux";
-import ParityList from "../posts/ParityList";
 import { withRouter } from "react-router";
 import Button from "../user-interface/Button";
 import apiClient from "../lib/api-client";
+import { signIn } from "./session-actions";
 
 class Login extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -41,45 +39,12 @@ class Login extends React.Component {
   onSubmit = e => {
     e.preventDefault();
 
-    //console.log(this.state);
-    apiClient
-      .post("/api/v1/sessions", {
-        //dane z naszego formularza w postaci obiektu
-        //axios post zwraca promise
-        user: {
-          email: this.state.email,
-          password: this.state.password
-        }
+    this.props.dispatch(
+      signIn({
+        email: this.state.email,
+        password: this.state.password
       })
-      .then(response => {
-        console.log(response);
-        this.props.dispatch({
-          type: "LOGIN",
-          data: {
-            email: response.data.data.email,
-            token: response.data.data.auth_token,
-            user_id: response.data.data.user_id
-          }
-        });
-        this.setState({
-          email: "",
-          password: ""
-        });
-
-        this.props.router.push("posts");
-      })
-      .catch(error => {
-        console.dir(error);
-        this.setState({
-          error: "Coś poszło nie tak"
-        });
-      });
-
-    // this.props.dispatch({
-    // 	type: "LOGIN",
-    // 	data: { email: this.state.email, password: this.state.password }
-    // });
-    // //przejscie do strony posts
+    );
   };
   showError = () => {};
 
@@ -111,6 +76,7 @@ class Login extends React.Component {
           />
           <h2>
             {this.state.error}
+            {this.props.session.status}
           </h2>
         </form>
       </div>
@@ -118,7 +84,9 @@ class Login extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    session: state.session
+  };
 };
 
 export default connect(mapStateToProps)(withRouter(Login));

@@ -1,8 +1,7 @@
 import React from "react";
-import Button from "../user-interface/Button";
+
 //import AlertButton from "../user-interface/AlertButton";
 import styled from "styled-components";
-import { connect } from "react-redux";
 
 class Post extends React.Component {
   remove = () => {
@@ -93,7 +92,7 @@ class PostList extends React.Component {
 
 const StyledPost = styled.div`
   border: 1px solid #aaa;
-  background-color: #eee;
+  background-color: #efd8cb;
   margin: 5px;
   padding: 5px;
   display: flex;
@@ -105,14 +104,4 @@ const StyledPost = styled.div`
 
 const StyledDiv = styled.div`justify-content: space-between;`;
 
-const StyledPostList = styled(PostList)`
-	margin-top: 10px;
-`;
-
-// const Button = styled.button`border: none;`;
-//
-// const AlertButton = Button.extend``;
-const mapStateToProps = state => {
-  return {};
-};
 export { PostList, Post };

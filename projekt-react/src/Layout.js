@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from "react";
+import React from "react";
 import { Link } from "react-router";
-import logo from "./img/logo.png";
+
 import styled from "styled-components";
 import { connect } from "react-redux";
 /**
@@ -82,11 +82,11 @@ export class Layout extends React.Component {
                 Posts
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/posts-details" style={{ color: "#c94c4c" }}>
                 Post Details
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/post-form" style={{ color: "#c94c4c" }}>
                 Add Post

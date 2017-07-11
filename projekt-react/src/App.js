@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import PropTypes from "prop-types";
+//import logo from "./logo.svg";
+//import PropTypes from "prop-types";
 import Layout from "./Layout";
-import { Router, Route, IndexRoute, Link, hashHistory } from "react-router";
+import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import PostsPage from "./posts/PostsPage";
 
 import Home from "./Home";

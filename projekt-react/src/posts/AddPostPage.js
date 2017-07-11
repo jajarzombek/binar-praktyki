@@ -1,8 +1,8 @@
 import React from "react";
 import PostForm from "./PostForm";
-import { PostList, Post } from "./PostList";
+
 import { connect } from "react-redux";
-import ParityList from "./ParityList";
+
 import apiClient from "../lib/api-client";
 import { withRouter } from "react-router";
 

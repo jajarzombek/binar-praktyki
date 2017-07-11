@@ -1,8 +1,8 @@
 import React from "react";
-import PostForm from "./PostForm";
-import { PostList, Post } from "./PostList";
+
+import { PostList } from "./PostList";
 import { connect } from "react-redux";
-import ParityList from "./ParityList";
+
 import apiClient from "../lib/api-client";
 import _ from "lodash";
 
@@ -104,7 +104,6 @@ class PostsPage extends React.Component {
       .reverse();
 
     const orderedPosts = _.orderBy(postsToRender, ["title"]);
-    const countPosts = this.props.posts.length;
 
     return (
       <div className="container-fluid">

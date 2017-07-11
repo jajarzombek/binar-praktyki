@@ -1,4 +1,5 @@
-import { compose, createStore, combineReducers } from "redux";
+import { compose, createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import { counter, posts } from "./posts/postsReducer";
 import session from "./session/sessionReducer";
 import persistState from "redux-localstorage";
@@ -9,7 +10,7 @@ const rootReducer = combineReducers({
   counter: counter,
   session: session
 });
-const enhancer = compose(persistState("session"));
+const enhancer = compose(applyMiddleware(thunk), persistState("session"));
 const store = createStore(rootReducer, {}, enhancer);
 
 export default store;

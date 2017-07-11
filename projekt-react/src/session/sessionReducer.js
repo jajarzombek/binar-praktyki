@@ -1,4 +1,4 @@
-const session = (state = { email: "", token: "" }, action) => {
+const session = (state = { email: "", token: "", status: "" }, action) => {
   switch (action.type) {
     case "LOGIN":
       console.log(action.data);
@@ -10,6 +10,8 @@ const session = (state = { email: "", token: "" }, action) => {
       };
     case "LOGOUT":
       return { email: "", password: "", user_id: "" };
+    case "LOGIN_PROCESSING":
+      return { ...state, status: action.data };
     default:
       return state;
   }
